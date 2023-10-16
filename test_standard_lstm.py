@@ -28,7 +28,7 @@ class TestLSTM(unittest.TestCase):
             model=model,
             train_batch_size=8,
             test_batch_size=256,
-            data="/data/datasets/mimic3-benchmarks/data/phenotyping",
+            data="/home/ugrads/c/conradk1234/conrad_sandbox/eICU_benchmark/data_mimicformat/phenotyping",
             learning_rate=0.001,
             weight_decay=0,
             report_freq=200,
@@ -41,20 +41,21 @@ class TestLSTM(unittest.TestCase):
 
     def test_standard_lstm_ihm(self):
         device = 0
-
+        from sklearn.linear_model import LogisticRegression
+        model = LogisticRegression()
         model = StandardLSTM(
-            n_classes=1,
-            hidden_dim=16,
-            num_layers=2,
-            dropout_rate=0.3,
-            bidirectional=True,
+             n_classes=1,
+             hidden_dim=64,
+             num_layers=2,
+             dropout_rate=0.1,
+             bidirectional=True,
         )
 
         trainer = IHMBenchmark(
             model=model,
             train_batch_size=8,
             test_batch_size=256,
-            data="/data/datasets/mimic3-benchmarks/data/in-hospital-mortality",
+            data="/home/ugrads/c/conradk1234/conrad_sandbox/eICU_benchmark/data_mimicformat/in-hospital-mortality",#"/data/datasets/mimic3-benchmarks/data/in-hospital-mortality",#"/home/ugrads/c/conradk1234/conrad_sandbox/eICU_benchmark/data_mimicformat/in-hospital-mortality",
             learning_rate=0.001,
             weight_decay=0,
             report_freq=200,
@@ -63,7 +64,7 @@ class TestLSTM(unittest.TestCase):
             wandb=False,
         )
 
-        trainer.fit(2)
+        trainer.fit(28)
 
     def test_standard_lstm_los(self):
         device = 0
@@ -145,3 +146,5 @@ class TestLSTM(unittest.TestCase):
 #         )
 
 #         trainer.fit(2)
+#TestLSTM().test_standard_lstm_phenotype()
+TestLSTM().test_standard_lstm_ihm()
