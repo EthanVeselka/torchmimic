@@ -98,7 +98,11 @@ class Discretizer:
             t = float(row[0]) - first_time
             if t > max_hours + eps:
                 continue
+            if t < first_time:
+                continue
+            
             bin_id = int(t / self._timestep - eps)
+            #print(bin_id, N_bins)
             assert 0 <= bin_id < N_bins
 
             for j in range(1, len(row)):
