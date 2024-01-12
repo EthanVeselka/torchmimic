@@ -22,7 +22,7 @@ class DecompensationDataset(BaseDataset):
     :param train: if true, the training split of the data will be used. Otherwise, the validation dataset will be used
     :type train: bool
     :param n_samples: number of samples to use. If None, all the data is used
-    :type steps: int
+    :type n_samples: int
     :param customListFile: listfile to use. If None, use train_listfile.csv
     :type steps: str
     """
